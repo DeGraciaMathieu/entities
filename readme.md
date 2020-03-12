@@ -24,7 +24,6 @@ class Human extends Entity
 Then instanciate a new entity like that :
 
 ```php
-
 $human = new Human([
     'name' => 'Bob',
     'age' => 42,
@@ -46,18 +45,35 @@ class People extends EntityList
     {
         return $entity instanceof Human::class;
     }
+
+    public function getYoungest() : Human
+    {
+        $consistentPeople = array_filter($this->entities, function ($human) {
+            return $human->isConsistent();
+        });
+        
+        uasort($consistentPeople, function ($a, $b) {
+            if ($a->age === $b->age) {
+                return 0;
+            }
+    
+            return ($a > $b) ? -1 : 1;
+        });
+
+        return array_pop($consistentPeople);
+    }
 }
 ```
 
 Then instanciate a list like that :
 
 ```php
-
-$bob = new Human(['name' => 'Bob']);
-$john = new Human(['name' => 'John']);
+$bob = new Human(['name' => 'Bob', 'age' => 12]);
+$john = new Human(['name' => 'John', 'age' => 10]);
 
 $people = new People([$bob, $john]);
 
 $people[0]->name // Bob
 $people[1]->name // John
+$people->getYoungest()->name // John
 ```
