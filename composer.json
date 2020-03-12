@@ -1,0 +1,13 @@
+{
+    "name": "alchemistery/entities",
+    "description": "Work with entities from your services or repositories",
+    "type": "library",
+    "authors": [
+        {
+            "name": "William",
+            "email": "work@suppo.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
