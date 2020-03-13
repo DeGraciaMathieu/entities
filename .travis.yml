@@ -1,0 +1,17 @@
+language: php
+
+php:
+  - 7.2
+
+matrix:
+  fast_finish: true
+
+cache:
+  directories:
+    - vendor
+
+install:
+  - composer update --no-interaction
+
+script:
+- vendor/bin/phpunit
