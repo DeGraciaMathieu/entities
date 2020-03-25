@@ -14,7 +14,7 @@ class Human extends Entity
     public $name;
     public $age;
 
-    public function isConsistent() : bool
+    public function isConsistent(): bool
     {
         return ! is_null($this->name) && ! is_null($this->age);
     }
@@ -41,12 +41,12 @@ use Alchemistery\EntityList;
 
 class People extends EntityList
 {
-    public function hasExpectedType(Entity $entity) : bool
+    public function hasExpectedType(Entity $entity): bool
     {
         return $entity instanceof Human::class;
     }
 
-    public function getYoungest() : Human
+    public function getYoungest(): Human
     {
         $consistentPeople = array_filter($this->entities, function ($human) {
             return $human->isConsistent();
