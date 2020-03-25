@@ -1,6 +1,6 @@
 # alchemistery/entities
 
-This package provide a way to implements entities. Useful for your services or repositories
+This package provide a way to implements entities. Useful for your services or repositories.
 
 ## Usage
 
@@ -48,9 +48,7 @@ class People extends EntityList
 
     public function getYoungest(): Human
     {
-        $consistentPeople = array_filter($this->entities, function ($human) {
-            return $human->isConsistent();
-        });
+        $consistentPeople = $this->getConsistentEntities();
         
         uasort($consistentPeople, function ($a, $b) {
             if ($a->age === $b->age) {

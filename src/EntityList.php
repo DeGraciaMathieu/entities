@@ -42,6 +42,18 @@ abstract class EntityList implements Countable, ArrayAccess, IteratorAggregate
     abstract protected function hasExceptedType(Entity $entity) : bool;
 
     /**
+     * Filter entities who's not consistent
+     *
+     * @return array
+     */
+    public function getConsistentEntities()
+    {
+        return array_filter($this->entities, function (Entity $entity) {
+            return $entity->isConsistent();
+        });
+    }
+
+    /**
      * @param mixed $offset
      * @return bool
      */

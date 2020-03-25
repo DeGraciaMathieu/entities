@@ -44,6 +44,24 @@ class EntityListTest extends TestCase
         $this->makeBadEntityList([$entity]);
     }
 
+    /** @test */
+    public function can_have_consistent_entities_only()
+    {
+        $consistentEntity = $this->makeEntity([
+            'name' => 'John',
+            'age' => 25,
+        ]);
+
+        $unconsistentEntity = $this->makeEntity([
+            'name' => 'Bob',
+        ]);
+
+        $entityList = $this->makeGoodEntityList([$consistentEntity, $unconsistentEntity]);
+
+        $this->assertCount(1, $entityList->getConsistentEntities());
+        $this->assertContains($consistentEntity, $entityList->getConsistentEntities());
+    }
+
     /**
      * @param array $entities
      * @return \Alchemistery\EntityList
@@ -80,10 +98,11 @@ class EntityListTest extends TestCase
     {
         return new class($attributes) extends Entity {
             public $name;
+            public $age;
 
             public function isConsistent(): bool
             {
-                return ! is_null($this->name);
+                return ! is_null($this->name) && ! is_null($this->age);
             }
         };
     }

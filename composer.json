@@ -1,8 +1,11 @@
 {
     "name": "alchemistery/entities",
-    "description": "Work with entities from your services or repositories",
     "type": "library",
-    "license": "gpl",
+    "description": "Work with entities from your services or repositories.",
+    "license": "MIT",
+    "keywords": [
+        "entity"
+    ],
     "authors": [
         {
             "name": "William",
