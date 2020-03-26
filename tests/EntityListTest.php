@@ -62,6 +62,24 @@ class EntityListTest extends TestCase
         $this->assertContains($consistentEntity, $entityList->getConsistentEntities());
     }
 
+    /** @test */
+    public function can_get_inconsistent_entities_only()
+    {
+        $consistentEntity = $this->makeEntity([
+            'name' => 'John',
+            'age' => 25,
+        ]);
+
+        $unconsistentEntity = $this->makeEntity([
+            'name' => 'Bob',
+        ]);
+
+        $entityList = $this->makeGoodEntityList([$consistentEntity, $unconsistentEntity]);
+
+        $this->assertCount(1, $entityList->getInconsistentEntities());
+        $this->assertContains($unconsistentEntity, $entityList->getInconsistentEntities());
+    }    
+
     /**
      * @param array $entities
      * @return \Alchemistery\EntityList
