@@ -1,5 +1,8 @@
 # alchemistery/entities
 
+[![Build Status](https://travis-ci.org/alchemistery/entities.svg?branch=master)](https://travis-ci.org/alchemistery/entities)
+[![Latest Stable Version](https://poser.pugx.org/alchemistery/entities/v/stable)](https://packagist.org/packages/alchemistery/entities)
+
 This package provide a way to implements entities. Useful for your services or repositories.
 
 ## Usage
