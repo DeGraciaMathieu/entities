@@ -66,12 +66,14 @@ class People extends EntityList
 Then instanciate a list like that :
 
 ```php
-$bob = new Human(['name' => 'Bob', 'age' => 12]);
-$john = new Human(['name' => 'John', 'age' => 10]);
+$bob = new Human(['name' => 'Bob', 'age' => 45]);
+$junior = new Human(['name' => 'Junior', 'age' => 21]);
+$jane = new Human(['name' => 'Jane', 'age' => 31]);
 
-$people = new People([$bob, $john]);
+$people = new People([$bob, $junior]);
+$people[] = $jane;
 
 $people[0]->name // Bob
-$people[1]->name // John
-$people->getYoungest()->name // John
+$people[1]->name // Junior
+$people->getYoungest()->name // Junior
 ```

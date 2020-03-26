@@ -62,6 +62,82 @@ class EntityListTest extends TestCase
         $this->assertContains($consistentEntity, $entityList->getConsistentEntities());
     }
 
+    /** @test */
+    public function can_add_entity()
+    {
+        $firstEntity = $this->makeEntity([
+            'name' => 'First',
+            'age' => 25,
+        ]);
+
+        $secondEntity = $this->makeEntity([
+            'name' => 'Second',
+            'age' => 25,
+        ]);
+
+        $thirdEntity = $this->makeEntity([
+            'name' => 'Third',
+            'age' => 25,
+        ]);
+
+        $entityList = $this->makeGoodEntityList([$firstEntity]);
+
+        $entityList[] = $secondEntity;
+        $entityList[5] = $thirdEntity;
+
+        $this->assertCount(3, $entityList);
+        $this->assertContains($firstEntity, $entityList);
+        $this->assertContains($secondEntity, $entityList);
+        $this->assertContains($thirdEntity, $entityList);
+    }
+
+    /** @test */
+    public function cant_add_unexpected_entity()
+    {
+        $entity = $this->makeEntity([
+            'name' => 'First',
+            'age' => 25,
+        ]);
+
+        $entityList = $this->makeBadEntityList([]);
+
+        $this->expectException(UnexpectedEntityException::class);
+
+        $entityList[] = $entity;
+    }
+
+    /** @test */
+    public function can_remove_entity()
+    {
+        $entity = $this->makeEntity([
+            'name' => 'First',
+            'age' => 25,
+        ]);
+
+        $entityList = $this->makeGoodEntityList([$entity]);
+
+        unset($entityList[0]);
+
+        $this->assertCount(0, $entityList);
+    }
+
+    /** @test */
+    public function can_check_entity()
+    {
+        $entity = $this->makeEntity([
+            'name' => 'First',
+            'age' => 25,
+        ]);
+
+        $entityList = $this->makeGoodEntityList([]);
+
+        $this->assertFalse(isset($entityList[0]));
+
+        $entityList[] = $entity;
+
+        $this->assertTrue(isset($entityList[0]));
+    }
+
     /**
      * @param array $entities
      * @return \Alchemistery\EntityList
