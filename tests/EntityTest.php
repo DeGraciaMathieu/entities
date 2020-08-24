@@ -20,9 +20,9 @@ class EntityTest extends TestCase
         $entity = $this->makeEntity($attributes);
 
         $this->assertInstanceOf(Entity::class, $entity);
-        $this->assertEquals($attributes['name'], $entity->name);
-        $this->assertEquals($attributes['age'], $entity->age);
-        $this->assertEquals($attributes['job'], $entity->job);
+        $this->assertSame($attributes['name'], $entity->name);
+        $this->assertSame($attributes['age'], $entity->age);
+        $this->assertSame($attributes['job'], $entity->job);
         $this->assertNull($entity->country);
         $this->assertObjectNotHasAttribute('nickname', $entity);
         $this->assertTrue($entity->isConsistent());
